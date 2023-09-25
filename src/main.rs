@@ -27,9 +27,8 @@ fn generate_sudoku(number_of_entries: usize) -> Vec<Vec<char>> {
             }
         }
     }
-    if !solve_sudoku(&mut start, 0, 0) {
-        panic!("Oh no!");
-    }
+
+    solve_sudoku(&mut start, 0, 0);
 
     let mut removed = 0;
     while removed < 9 * 9 - number_of_entries {
@@ -157,9 +156,8 @@ fn main() {
     if !solve_sudoku(&mut board, 0, 0) {
         panic!("Oh no it failed...");
     }
-    println!("Solved? {}", is_solved(&board));
+    println!("Solved sudoku:");
     print_board(&board);
-
 
     let correct: [[char; 9]; 9] = [['7', '9', '2', '1', '5', '4', '3', '8', '6'],
                                 ['6', '4', '3', '8', '2', '7', '1', '5', '9'],
@@ -172,10 +170,10 @@ fn main() {
                                 ['5', '2', '8', '6', '3', '9', '4', '1', '7']];
     let correct_board: Vec<Vec<char>> = array_to_vec(correct);
     if !is_solved(&correct_board) {
-        panic!("Something is wrong here!")
+        panic!("This sudoku should be correct!")
     }
 
     let generated_board = generate_sudoku(30);
-    println!("-----result-----");
+    println!("Generated sudoku:");
     print_board(&generated_board);
 }
